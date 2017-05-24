@@ -9,13 +9,13 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    aws-sdk (2.9.21)
-      aws-sdk-resources (= 2.9.21)
-    aws-sdk-core (2.9.21)
+    aws-sdk (2.9.23)
+      aws-sdk-resources (= 2.9.23)
+    aws-sdk-core (2.9.23)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.9.21)
-      aws-sdk-core (= 2.9.21)
+    aws-sdk-resources (2.9.23)
+      aws-sdk-core (= 2.9.23)
     aws-sigv4 (1.0.0)
     builder (3.2.3)
     coderay (1.1.1)
@@ -34,9 +34,11 @@ GEM
     guard-cloudformation (0.0.3)
       colorize
       guard
-    guard-lono (1.0.0)
+    guard-compat (1.2.1)
+    guard-lono (1.0.1)
       colorize
       guard
+      guard-compat
     hashie (3.5.5)
     i18n (0.8.1)
     jmespath (1.3.1)
