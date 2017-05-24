@@ -8,3 +8,7 @@ template "instance_and_route53.yml" do
     route53: true
   )
 end
+
+template "asg.yml" do
+  source "asg.yml.erb"
+end
