@@ -438,8 +438,8 @@ Resources:
       AutoScalingRollingUpdate:
         MinInstancesInService: '1'
         MaxBatchSize: '1'
-        PauseTime: PT15M
-        WaitOnResourceSignals: 'true'
+        PauseTime: PT1M
+        WaitOnResourceSignals: 'false'
   LaunchConfig:
     Type: AWS::AutoScaling::LaunchConfiguration
     Metadata:
@@ -451,55 +451,22 @@ Resources:
               httpd: []
           files:
             "/var/www/html/index.html":
-              content:
-                Fn::Join:
-                - "\n"
-                - - <img src="
-                  - Fn::FindInMap:
-                    - Region2Examples
-                    - Ref: AWS::Region
-                    - Examples
-                  - /cloudformation_graphic.png" alt="AWS CloudFormation Logo"/>
-                  - "<h1>Congratulations, you have successfully launched the AWS CloudFormation
-                    sample.</h1>"
+              content: !Sub
+                - '<img src="${Domain}/cloudformation_graphic.png" alt="AWS CloudFormation Logo"/>
+<h1>Congratulations, you have successfully launched the AWS CloudFormation sample.</h1>'
+                - { Domain: !FindInMap [ Region2Examples, !Ref "AWS::Region", Examples ] }
               mode: '000644'
               owner: root
               group: root
             "/etc/cfn/cfn-hup.conf":
-              content:
-                Fn::Join:
-                - ''
-                - - "[main]\n"
-                  - stack=
-                  - Ref: AWS::StackId
-                  - "\n"
-                  - region=
-                  - Ref: AWS::Region
-                  - "\n"
+              content: !Sub |
+<%= partial("cfn/cfn-hup.conf.erb", {}, indent: 16) %>
               mode: '000400'
               owner: root
               group: root
             "/etc/cfn/hooks.d/cfn-auto-reloader.conf":
-              content:
-                Fn::Join:
-                - ''
-                - - "[cfn-auto-reloader-hook]\n"
-                  - 'triggers=post.update
-
-'
-                  - 'path=Resources.LaunchConfig.Metadata.AWS::CloudFormation::Init
-
-'
-                  - 'action=/opt/aws/bin/cfn-init -v '
-                  - "         --stack "
-                  - Ref: AWS::StackName
-                  - "         --resource LaunchConfig "
-                  - "         --region "
-                  - Ref: AWS::Region
-                  - "\n"
-                  - 'runas=root
-
-'
+              content: !Sub |
+<%= partial("cfn/cfn-auto-reloader.conf.erb", {}, indent: 16) %>
           services:
             sysvinit:
               httpd:
@@ -527,30 +494,8 @@ Resources:
       InstanceType:
         Ref: InstanceType
       UserData:
-        Fn::Base64:
-          Fn::Join:
-          - ''
-          - - "#!/bin/bash -xe\n"
-            - 'yum update -y aws-cfn-bootstrap
-
-'
-            - 'yum update -y aws-cli
-
-'
-            - "/opt/aws/bin/cfn-init -v "
-            - "         --stack "
-            - Ref: AWS::StackName
-            - "         --resource LaunchConfig "
-            - "         --region "
-            - Ref: AWS::Region
-            - "\n"
-            - "/opt/aws/bin/cfn-signal -e $? "
-            - "         --stack "
-            - Ref: AWS::StackName
-            - "         --resource WebServerGroup "
-            - "         --region "
-            - Ref: AWS::Region
-            - "\n"
+        Fn::Base64: !Sub |
+<%= partial("user_data/asg.sh.erb", {}, indent: 10) %>
   WebServerScaleUpPolicy:
     Type: AWS::AutoScaling::ScalingPolicy
     Properties:
