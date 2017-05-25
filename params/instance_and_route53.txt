@@ -1,0 +1,4 @@
+KeyName=tutorial
+InstanceType=t2.micro
+HostedZoneName=sub.tongueroo.com.
+Subdomain=testsubdomain

@@ -1,0 +1,5 @@
+KeyName=tutorial
+InstanceType=t2.micro
+OperatorEMail=tung@boltops.com
+VpcId=vpc-427d5e25
+Subnets=subnet-36f48b51,subnet-f0a839b9,subnet-b2c529e9
