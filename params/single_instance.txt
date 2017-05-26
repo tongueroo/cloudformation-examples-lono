@@ -1,0 +1,2 @@
+KeyName=tutorial
+InstanceType=t2.micro
