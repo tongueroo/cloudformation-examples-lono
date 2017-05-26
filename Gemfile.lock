@@ -9,13 +9,13 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    aws-sdk (2.9.23)
-      aws-sdk-resources (= 2.9.23)
-    aws-sdk-core (2.9.23)
+    aws-sdk (2.9.25)
+      aws-sdk-resources (= 2.9.25)
+    aws-sdk-core (2.9.25)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.9.23)
-      aws-sdk-core (= 2.9.23)
+    aws-sdk-resources (2.9.25)
+      aws-sdk-core (= 2.9.25)
     aws-sigv4 (1.0.0)
     builder (3.2.3)
     coderay (1.1.1)
@@ -47,7 +47,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    lono (1.1.0)
+    lono (1.1.1)
       colorize
       guard
       guard-cloudformation
@@ -56,7 +56,7 @@ GEM
       rake
       rb-fsevent
       thor
-    lono-cfn (0.1.0)
+    lono-cfn (1.0.2)
       aws-sdk
       colorize
       hashie
