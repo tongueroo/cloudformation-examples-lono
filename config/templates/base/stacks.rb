@@ -1,8 +1,8 @@
-template "single_instance" do
+template "single-instance" do
   source "instance"
 end
 
-template "instance_and_route53" do
+template "instance-and-route53" do
   source "instance"
   variables(
     route53: true
