@@ -460,13 +460,13 @@ Resources:
               group: root
             "/etc/cfn/cfn-hup.conf":
               content: !Sub |
-<%= partial("cfn/cfn-hup.conf.erb", {}, indent: 16) %>
+<%= partial("cfn/cfn-hup.conf", {}, indent: 16) %>
               mode: '000400'
               owner: root
               group: root
             "/etc/cfn/hooks.d/cfn-auto-reloader.conf":
               content: !Sub |
-<%= partial("cfn/cfn-auto-reloader.conf.erb", {}, indent: 16) %>
+<%= partial("cfn/cfn-auto-reloader.conf", {}, indent: 16) %>
           services:
             sysvinit:
               httpd:
@@ -495,7 +495,7 @@ Resources:
         Ref: InstanceType
       UserData:
         Fn::Base64: !Sub |
-<%= partial("user_data/asg.sh.erb", {}, indent: 10) %>
+<%= partial("user_data/asg.sh", {}, indent: 10) %>
   WebServerScaleUpPolicy:
     Type: AWS::AutoScaling::ScalingPolicy
     Properties:
